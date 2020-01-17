@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>inclusive-starter</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>inclusive-starter</name>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>com.uscraft</groupId>
+		<artifactId>inclusive-spring</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>inclusive-basic</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!--web 引用-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.junit.jupiter</groupId>
+					<artifactId>junit-jupiter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-junit-jupiter</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!--jdbc-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.zaxxer</groupId>
+					<artifactId>HikariCP</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<!--
+                比较常用的打包命令
+                mvn clean package spring-boot:repackage
+                只有使用下面的maven命令在cmd窗口启动，
+                热加载才能生效，如果直接Run运行的Application是
+                不支持热加载的
+                mvn clean spring-boot:run
+                -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<!--引入springloaded来实现动态加载-->
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.6.RELEASE</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
+						</goals>
+						<!--<configuration>
+                            <classifier>exec</classifier>
+                        </configuration>-->
+					</execution>
+				</executions>
+				<configuration>
+					<!--  <mainClass>com.dhgate.rate.ApplicationSearch</mainClass> -->
+					<!--指定监听的端口号-->
+					<jvmArguments>
+						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=7777
+					</jvmArguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

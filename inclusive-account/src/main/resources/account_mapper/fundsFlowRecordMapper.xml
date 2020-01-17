@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uscraft.account.mapper.fundsFlowRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.uscraft.account.domain.fundsFlowRecord" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="BIGINT" />
+  </resultMap>
+</mapper>
