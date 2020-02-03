@@ -1,0 +1,2 @@
+com.uscraft.domain.spi.service.EmailServiceProvider
+com.uscraft.domain.spi.service.PushNotificationServiceProvider
